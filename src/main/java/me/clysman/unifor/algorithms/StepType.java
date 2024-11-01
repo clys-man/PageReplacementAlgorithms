@@ -6,9 +6,6 @@ public enum StepType {
 
     private final String text;
 
-    /**
-     * @param text
-     */
     StepType(final String text) {
         this.text = text;
     }

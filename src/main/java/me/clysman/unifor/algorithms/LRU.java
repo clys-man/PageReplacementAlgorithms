@@ -15,7 +15,7 @@ public class LRU extends PageReplacementAlgorithm {
         for (int page : this.getPages()) {
             if (!memory.contains(page)) {
                 if (memory.size() == this.getCapacity()) {
-                    int leastRecentlyUsed = memory.iterator().next();
+                    int leastRecentlyUsed = memory.getFirst();
                     memory.remove(leastRecentlyUsed);
                 }
                 

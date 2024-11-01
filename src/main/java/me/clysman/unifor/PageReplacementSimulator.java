@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PageReplacementSimulator {
     public static void main(String[] args) {
-        List<Integer> pages = Arrays.asList(7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3);
+        List<Integer> pages = Arrays.asList(2, 5, 10, 1, 2, 2, 6, 9, 1, 2, 10, 2, 6 ,1 ,2 ,1 ,6 ,9, 5, 1);
         int capacity = 4;
 
         List<PageReplacementAlgorithm> algorithms = Arrays.asList(
@@ -33,8 +33,8 @@ public class PageReplacementSimulator {
         System.out.println("+------+-----------------+-------+");
 
         for (Step step : algorithm.getSteps()) {
-            String memory = step.getMemoryState().toString();
-            System.out.printf(format, step.getPage(), memory, step.getType());
+            String memory = step.memoryState().toString();
+            System.out.printf(format, step.page(), memory, step.type());
         }
 
         System.out.println("+------+-----------------+-------+");

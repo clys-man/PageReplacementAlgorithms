@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class PageReplacementAlgorithm {
+public abstract class PageReplacementAlgorithm implements IPageReplacementAlgorithm {
     private final List<Integer> pages;
     private final int capacity;
     private final List<Step> steps = new ArrayList<>();
@@ -31,7 +31,11 @@ public abstract class PageReplacementAlgorithm {
     }
 
     public int getPageFaults() {
-        return (int) steps.stream().filter(step -> step.getType() == StepType.MISS).count();
+        return (int) steps.stream().filter(step -> step.type() == StepType.MISS).count();
+    }
+
+    public int getPageHits() {
+        return (int) steps.stream().filter(step -> step.type() == StepType.HIT).count();
     }
 
     public abstract void execute();
