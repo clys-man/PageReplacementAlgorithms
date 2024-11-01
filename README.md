@@ -1,47 +1,91 @@
-# Page Replacement Algorithms Simulator
+# Simulador de Algoritmos de Substituição de Páginas
 
-## Descrição
-
-Este projeto é uma simulação de algoritmos de substituição de páginas, que é uma parte fundamental da gestão de memória em sistemas operacionais. O simulador compara a eficiência de diferentes algoritmos de substituição de páginas, como FIFO, LRU, MRU, Clock e Ótimo, exibindo o número de falhas de página (page faults) ocorridas em cada algoritmo.
-
-Além disso, o projeto utiliza a biblioteca JFreeChart para visualizar graficamente a comparação de desempenho dos algoritmos.
+Este projeto implementa um simulador de algoritmos de substituição de páginas com uma interface gráfica, utilizando Java Swing e a biblioteca de gráficos JFreeChart. O simulador permite comparar visualmente o desempenho de diferentes algoritmos de substituição de páginas (*Page Replacement Algorithms*) ao simular o processo de carregamento de páginas em uma memória com capacidade limitada.
 
 ## Algoritmos Implementados
 
-- **FIFO (First-In-First-Out)**: O algoritmo mais simples, que substitui a página que entrou primeiro na memória.
-- **LRU (Least Recently Used)**: Substitui a página que não foi utilizada por mais tempo.
-- **MRU (Most Recently Used)**: Substitui a página que foi usada mais recentemente.
-- **Clock**: Uma versão do algoritmo FIFO que utiliza uma abordagem circular com bits de referência.
-- **Ótimo**: Substitui a página que não será utilizada pelo maior período de tempo no futuro.
+- **FIFO** (First-In, First-Out)
+- **LRU** (Least Recently Used)
+- **MRU** (Most Recently Used)
+- **Clock**
+- **Ótimo**
 
-## Requisitos
+## Funcionalidades
 
-- **Java 8 ou superior**
-- **Maven**: Para gerenciar dependências e construir o projeto.
+- Visualização de cada passo do algoritmo para uma lista de páginas.
+- Destaque visual para *page hits* e *page faults*.
+- Comparação gráfica entre os algoritmos para a quantidade de *page faults* e *page hits*.
+- Cálculo de estatísticas como percentual de *hits* para cada algoritmo.
 
-## Instalação
+## Pré-requisitos
 
-1. **Clone o repositório:**
+- **Java**: versão 21 ou superior
+- **Apache Maven**: versão 3.6 ou superior
 
-   ```bash
-   git clone https://github.com/clys-man/page-replacement-algorithms.git
-   cd page-replacement-algorithms
-   ```
+## Instalação e Execução
 
-2. **Compile e execute o projeto usando Maven:**
+### 1. Clonar o Repositório
 
-   Se você já possui o Maven instalado, você pode compilar e executar o projeto com o seguinte comando:
+Clone o repositório para o seu ambiente local usando o comando:
 
-   ```bash
-   mvn clean install
-   ```
+```bash
+git clone https://github.com/clys-man/page-replacement-algorithms.git
+cd page-replacement-algorithms
+```
 
-3. **Execute a simulação:**
+### 2. Compilar e Executar com Maven
 
-   Após compilar o projeto, execute o seguinte comando para iniciar a simulação:
+O Maven gerencia as dependências do projeto, incluindo a biblioteca **JFreeChart**.
 
-   ```bash
-   mvn exec:java -Dexec.mainClass="me.clysman.unifor.simulator.PageReplacementSimulator"
-   ```
+- Para compilar o projeto e resolver as dependências, execute:
 
-   Certifique-se de que o `exec-maven-plugin` está configurado no seu `pom.xml` para permitir a execução da classe principal.
+  ```bash
+  mvn clean compile
+  ```
+
+- Para executar o simulador:
+
+  ```bash
+  mvn exec:java -Dexec.mainClass="me.clysman.unifor.PageReplacementSimulator"
+  ```
+
+### 3. Construir um Pacote JAR Executável (Opcional)
+
+Para construir um pacote JAR executável que inclui todas as dependências:
+
+```bash
+mvn package
+```
+
+O arquivo JAR gerado estará em `target/PageReplacementSimulator-1.0-SNAPSHOT.jar`. Execute o JAR com o comando:
+
+```bash
+java -jar target/PageReplacementSimulator-1.0-SNAPSHOT.jar
+```
+
+## Dependências
+
+O projeto utiliza a biblioteca **JFreeChart** para a geração de gráficos.
+
+```xml
+<dependencies>
+   <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jfreechart</artifactId>
+      <version>1.0.13</version>
+   </dependency>
+</dependencies>
+```
+
+## Capturas de Tela
+
+### Interface Principal
+- Tabela mostrando passos do algoritmo com células em verde para *hits* e em vermelho para *misses*.
+
+![Interface Principal](docs/algorithm.png)
+
+
+### Gráfico Comparativo
+- Gráfico de barras exibindo a quantidade de *page faults* e *page hits* para cada algoritmo.
+
+![Gráfico Comparativo](docs/chart.png)
