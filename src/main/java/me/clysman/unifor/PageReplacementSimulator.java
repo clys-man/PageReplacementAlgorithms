@@ -58,13 +58,17 @@ public class PageReplacementSimulator extends JFrame {
     private static JPanel createAlgorithmPanel(PageReplacementAlgorithm algorithm) {
         int pageFaults = algorithm.getPageFaults();
         int pageHits = algorithm.getPageHits();
-        double hitPercentage = (pageHits * 100.0) / (pageHits + pageFaults);
+        int totalAccesses = pageHits + pageFaults;
+
+        double hitPercentage = (pageHits * 100.0) / totalAccesses;
+        double faultPercentage = (pageFaults * 100.0) / totalAccesses;
 
         JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new GridLayout(1, 3));
+        infoPanel.setLayout(new GridLayout(2, 3)); // Ajustado para 2 linhas e 3 colunas
         infoPanel.add(new JLabel("Page Faults: " + pageFaults));
         infoPanel.add(new JLabel("Page Hits: " + pageHits));
         infoPanel.add(new JLabel(String.format("Hit Percentage: %.2f%%", hitPercentage)));
+        infoPanel.add(new JLabel("Fault Percentage: " + String.format("%.2f%%", faultPercentage)));
 
         JTable table = createTableForAlgorithm(algorithm);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -150,17 +154,17 @@ public class PageReplacementSimulator extends JFrame {
             return columnNames[column];
         }
     }
-
     static class CellRenderer extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
             StepType type = (StepType) table.getModel().getValueAt(row, 2);
+
             if (type == StepType.MISS) {
-                cell.setBackground(Color.RED);
+                cell.setBackground(new Color(255, 0, 0));
             } else if (type == StepType.HIT) {
-                cell.setBackground(Color.GREEN);
+                cell.setBackground(new Color(0, 255, 0)); // Verde claro
             } else {
                 cell.setBackground(Color.WHITE);
             }
